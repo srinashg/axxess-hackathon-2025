@@ -1,5 +1,5 @@
 // src/components/Login.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function Login() {
   const [email, setEmail] = useState('');

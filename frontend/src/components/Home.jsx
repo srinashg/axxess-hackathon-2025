@@ -1,5 +1,5 @@
 // src/components/Home.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function Home() {
   const [hdl, setHdl] = useState('');
