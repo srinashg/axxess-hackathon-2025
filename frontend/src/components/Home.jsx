@@ -1,5 +1,6 @@
 // src/components/Home.jsx
 import { useState } from 'react';
+import CSS from './HomePage.module.css';
 
 function Home() {
   const [hdl, setHdl] = useState('');
@@ -36,7 +37,7 @@ function Home() {
       <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Cholesterol Levels (mg/dL)</legend>
-          <div>
+          <div className={CSS.input}>
             <label htmlFor="hdl">HDL Cholesterol:</label>
             <input
               type="number"
@@ -47,7 +48,7 @@ function Home() {
               required
             />
           </div>
-          <div>
+          <div className={CSS.input}>
             <label htmlFor="ldl">LDL Cholesterol:</label>
             <input
               type="number"
@@ -62,7 +63,7 @@ function Home() {
 
         <fieldset>
           <legend>Health Habits Questionnaire</legend>
-          <div>
+          <div className={CSS.input}>
             <label htmlFor="foodToday">What food did you eat today?</label>
             <textarea
               id="foodToday"
@@ -71,7 +72,7 @@ function Home() {
               placeholder="List the food items"
             />
           </div>
-          <div>
+          <div className={CSS.input}>
             <label htmlFor="exerciseToday">How long did you exercise today?</label>
             <input
               type="text"
@@ -91,7 +92,7 @@ function Home() {
               placeholder="e.g., 2 hours, 5 hours, Less than 1 hour"
             />
           </div>
-          <div>
+          <div className={CSS.input}>
             <label htmlFor="smokeVape">Do you smoke/vape?</label>
             <select
               id="smokeVape"
@@ -104,7 +105,7 @@ function Home() {
               <option value="no">No</option>
             </select>
           </div>
-          <div>
+          <div className={CSS.input}>
             <label>Are you on any medications?</label>
             <div>
               <label htmlFor="cholesterolMeds">Cholesterol Medications?</label>
@@ -119,7 +120,7 @@ function Home() {
                 <option value="no">No</option>
               </select>
             </div>
-            <div>
+            <div className={CSS.input}>
               <label htmlFor="otherMeds">Other Medications?</label>
               <select
                 id="otherMeds"
