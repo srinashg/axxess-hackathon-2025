@@ -2,6 +2,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 function Home() {
+  /*
+  defines the state of each question. the 'set' methods (right) take the value of the input and set the value to the variable (left)
+  [hdl, setHdl]: setHdl = 58 means hdl = 58, which is updated in useState into the textbox
+  */
   const [hdl, setHdl] = useState('');
   const [ldl, setLdl] = useState('');
   const [foodToday, setFoodToday] = useState('');
@@ -11,6 +15,10 @@ function Home() {
   const [cholesterolMeds, setCholesterolMeds] = useState('');
   const [otherMeds, setOtherMeds] = useState('');
 
+  /*
+  useState(0) means the question index starts with index 0, which is the first question
+  some questions are recorded, and others are binary inputs
+  */
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const questions = [
     { question: 'What is your HDL Cholesterol level?', stateSetter: setHdl, stateValue: hdl, inputType: 'number', placeholder: 'HDL level' },
@@ -45,6 +53,11 @@ function Home() {
   const [transcript, setTranscript] = useState('');
   const recognitionRef = useRef(null);
 
+  /*
+  handles side effects = anything in the outside world (the internet)
+  some browsers don't support speech recognition, so we check for that
+  otherwise continue speech recognition like normal
+  */
   useEffect(() => {
     if (!('webkitSpeechRecognition' in window)) {
       console.log('Speech recognition is not supported in this browser.');
@@ -77,6 +90,8 @@ function Home() {
     recognitionRef.current.onend = () => {
       setIsRecording(false);
       if (transcript) {
+        console.log("Transcript on end:", transcript); // Debugging log
+        console.log("State Setter Function:", questions[currentQuestionIndex].stateSetter); // Debugging log
         questions[currentQuestionIndex].stateSetter(transcript); // Set state with transcript
       }
     };
@@ -116,6 +131,11 @@ function Home() {
     alert('Health Assessment submitted (no backend yet, check console for data)');
   };
 
+  /*
+  clicking the previous button moves to the previous question
+  clicking the next button moves to the next question
+  clicking the submit button submits the assessment
+  */
   const currentQuestion = questions[currentQuestionIndex];
 
   const moveToNextQuestion = () => {
@@ -148,14 +168,14 @@ function Home() {
                   id={`input-${currentQuestionIndex}`}
                   value={currentQuestion.stateValue}
                   placeholder={currentQuestion.placeholder}
-                  readOnly // Make input read-only, voice input will update state directly
+                  // readOnly  - Removed readOnly for debugging
                 />
               ) : (
                 <textarea
                   id={`input-${currentQuestionIndex}`}
                   value={currentQuestion.stateValue}
                   placeholder={currentQuestion.placeholder}
-                  readOnly // Make textarea read-only, voice input will update state directly
+                  // readOnly - Removed readOnly for debugging
                 />
               )}
               <button type="button" onClick={startRecording} disabled={isRecording}>
