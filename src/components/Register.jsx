@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 function Register() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,6 +18,16 @@ function Register() {
     <div>
       <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="registerName">Name:</label>
+          <input
+            type="name"
+            id="registerName"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
         <div>
           <label htmlFor="registerEmail">Email:</label>
           <input
