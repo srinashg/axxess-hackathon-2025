@@ -123,10 +123,11 @@ function App() {
   };
 
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  const bottomRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    bottomRef.current?.scrollIntoView({behavior: "smooth"});
     setLoading(true);
     console.log(apiKey);
 
@@ -257,7 +258,11 @@ function App() {
           </div>
         </div>
         {/* Show loading message while waiting for response */}
-        {loading && <ClipLoader size={50} color="#4A90E2" />}
+        {loading && (
+          <div ref={bottomRef} style={{ padding: '20px 0', display: 'flex', justifyContent: 'center' }}>
+            <ClipLoader color="#4A90E2" size={50} />
+          </div>
+        )}
 
         {parsedResponse && !loading && (
       <div className="api-response" style={{ backgroundColor: 'white', color: 'black', borderRadius: '10px', padding: '15px', marginTop: '20px', maxWidth: '400px', textAlign: 'center', marginBottom: '30px' }}>
