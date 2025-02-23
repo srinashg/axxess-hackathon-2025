@@ -89,11 +89,13 @@ function Home() {
 
     recognitionRef.current.onend = () => {
       setIsRecording(false);
-      if (transcript) {
-        console.log("Transcript on end:", transcript); // Debugging log
-        console.log("State Setter Function:", questions[currentQuestionIndex].stateSetter); // Debugging log
-        questions[currentQuestionIndex].stateSetter(transcript); // Set state with transcript
-      }
+    
+      setTranscript((prevTranscript) => {
+        console.log("Transcript on end:", prevTranscript);
+        console.log("State Setter Function:", questions[currentQuestionIndex].stateSetter);
+        questions[currentQuestionIndex].stateSetter(prevTranscript);
+        return prevTranscript; // Return the state to ensure consistency
+      });
     };
 
     return () => {
