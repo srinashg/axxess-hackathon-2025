@@ -14,6 +14,7 @@ function Home() {
   const [smokeVape, setSmokeVape] = useState('');
   const [cholesterolMeds, setCholesterolMeds] = useState('');
   const [otherMeds, setOtherMeds] = useState('');
+  const [apiResponse, setApiResponse] = useState('');
 
   /*
   useState(0) means the question index starts with index 0, which is the first question
@@ -117,10 +118,12 @@ function Home() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  console.log(apiKey)
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // In a real application, you would send this data to your backend.
-    console.log('Health Assessment Data:', {
+    const healthData = {
       hdl,
       ldl,
       foodToday,
@@ -128,9 +131,43 @@ function Home() {
       exercisePerWeek,
       smokeVape,
       cholesterolMeds,
-      otherMeds,
-    });
-    alert('Health Assessment submitted (no backend yet, check console for data)');
+      otherMeds
+    };
+
+    console.log("Health Assessment Data:", healthData);
+    alert('Health Assessment submitted!');
+
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-4",
+          messages: [
+            {
+              role: "system",
+              content: "You are a 10 year-old girl named Lilip who wants to help her grandparents care for their health. She speaks with a friendly, helpful tone with a simple, repetitive vocabulary and frequent exclamations of affection. Avoid emojis and metaphors. Here's some sample dialogue: Lili: Hi! My name is Lili! I’m here to help you take care of yourself, because I care! I’m here to help you lower your cholesterol levels. Your responses should be at most 240 characters."
+            },
+            {
+              role: "user",
+              content: `Here is the user's health data: ${JSON.stringify(healthData)}. Provide feedback for a healthier lifestyle.`
+            }
+          ]
+        }),
+      });
+  
+      const data = await response.json();
+      const feedbackMessage = data.choices[0].message.content;
+      setApiResponse(feedbackMessage);
+      // alert(`Health Feedback: ${data.choices[0].message.content}`);
+    } catch (error) {
+      console.error("Error:", error);
+      setApiResponse("Failed to retrieve feedback. Please try again later.");
+      // alert("Failed to retrieve feedback. Please try again later.");
+    }
   };
 
   /*
@@ -228,6 +265,12 @@ function Home() {
           </div>
         </div>
       </div>
+      {apiResponse && (
+  <div className="api-response" style={{ backgroundColor: 'white', color: 'black', borderRadius: '10px', padding: '15px', marginTop: '20px', maxWidth: '400px', textAlign: 'center' }}>
+    <h3>Health Feedback</h3>
+    <p>{apiResponse}</p>
+  </div>
+)}
     </div>
   );
 }
