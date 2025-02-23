@@ -22,8 +22,8 @@ function Home() {
   */
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const questions = [
-    { question: 'What is your HDL Cholesterol level?', stateSetter: setHdl, stateValue: hdl, inputType: 'number', placeholder: 'HDL level' },
-    { question: 'What is your LDL Cholesterol level?', stateSetter: setLdl, stateValue: ldl, inputType: 'number', placeholder: 'LDL level' },
+    { question: 'Can you tell me what your HDL was from your last lipid panel screening?', stateSetter: setHdl, stateValue: hdl, inputType: 'number', placeholder: 'HDL level' },
+    { question: 'How about your LDL Cholesterol level?', stateSetter: setLdl, stateValue: ldl, inputType: 'number', placeholder: 'LDL level' },
     { question: 'What food did you eat today?', stateSetter: setFoodToday, stateValue: foodToday, inputType: 'text', placeholder: 'Food items' },
     { question: 'How long did you exercise today?', stateSetter: setExerciseToday, stateValue: exerciseToday, inputType: 'text', placeholder: 'e.g., 30 minutes' },
     { question: 'How long do you exercise per week?', stateSetter: setExercisePerWeek, stateValue: exercisePerWeek, inputType: 'text', placeholder: 'e.g., 2 hours' },
@@ -193,7 +193,7 @@ function Home() {
     <div className="home-container" style={{ backgroundColor: '#B9243C', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
         <h1>Lilip</h1>
-        <p style={{ fontSize: '2em'}}>Please answer the questions by voice to monitor your health habits and cholesterol levels.</p>
+        <p style={{ fontSize: '2em', marginRight: '300px', marginLeft: '300px'}}>Hi! My name's Lilip! But you can call me Lili. I'm here to help you take care of your cholesterol!</p>
       </div>
 
       <div className="doll-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '30px' }}>
