@@ -1,8 +1,5 @@
-# React + Vite
+# Lillip
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Lillip is a web application that provides a detailed recommendation plan for users to improve their cholesterol levels and their overall health. Users are asked a series of questions regarding their current cholesterol levels from their lipid panel test, as well as their dietary, exercise, and other health habits (medications and/or smoking). The recommendation plan is then determined based on these results.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Made using React + Vite and Python
