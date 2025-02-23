@@ -151,49 +151,62 @@ function Home() {
   };
 
   return (
-    <div className="home-container">
-      <h1>Welcome to your Health Assessment!</h1>
-      <p>Please answer the questions by voice to monitor your health habits and cholesterol levels.</p>
+    <div className="home-container" style={{ backgroundColor: '#B9243C', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <nav style={{ width: '100%', padding: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', alignItems: 'center' }}>
+          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Home</a></li>
+          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>About</a></li>
+          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Services</a></li>
+          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Contact</a></li>
+        </ul>
+      </nav>
 
-      <div className="doll-container">
-        <img src="/Lili_mascot.png" alt="Friendly Doll" className="doll-image" />
-        <div className="text-bubble">
-          <p className="question-text">{currentQuestion.question}</p>
+      <div style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
+        <h1>Welcome to your Health Assessment!</h1>
+        <p>Please answer the questions by voice to monitor your health habits and cholesterol levels.</p>
+      </div>
+
+      <div className="doll-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '30px' }}>
+        <img src="/Lili_mascot.png" alt="Friendly Doll" className="doll-image" style={{ maxWidth: '200px', marginBottom: '20px' }} />
+        <div className="text-bubble" style={{ backgroundColor: 'white', color: 'black', borderRadius: '15px', padding: '20px', marginBottom: '20px', maxWidth: '80%', textAlign: 'left' }}>
+          <p className="question-text" style={{ fontWeight: 'bold', marginBottom: '10px' }}>{currentQuestion.question}</p>
 
           {currentQuestion.inputType === 'number' || currentQuestion.inputType === 'text' ? (
-            <div className="input-area">
+            <div className="input-area" style={{ marginBottom: '15px' }}>
               {currentQuestion.inputType === 'number' ? (
                 <input
                   type="number"
                   id={`input-${currentQuestionIndex}`}
                   value={currentQuestion.stateValue}
                   placeholder={currentQuestion.placeholder}
-                  // readOnly  - Removed readOnly for debugging
+                  style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: 'calc(100% - 22px)', marginBottom: '10px' }}
+                // readOnly   - Removed readOnly for debugging
                 />
               ) : (
                 <textarea
                   id={`input-${currentQuestionIndex}`}
                   value={currentQuestion.stateValue}
                   placeholder={currentQuestion.placeholder}
-                  // readOnly - Removed readOnly for debugging
+                  style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: 'calc(100% - 22px)', marginBottom: '10px', height: '80px' }}
+                // readOnly - Removed readOnly for debugging
                 />
               )}
-              <button type="button" onClick={startRecording} disabled={isRecording}>
+              <button type="button" onClick={startRecording} disabled={isRecording} style={{ padding: '8px 15px', borderRadius: '5px', backgroundColor: '#4CAF50', color: 'white', border: 'none', marginRight: '5px', cursor: 'pointer' }}>
                 {isRecording ? 'Recording...' : 'Start Voice Input'}
               </button>
-              <button type="button" onClick={stopRecording} disabled={!isRecording}>
+              <button type="button" onClick={stopRecording} disabled={!isRecording} style={{ padding: '8px 15px', borderRadius: '5px', backgroundColor: '#f44336', color: 'white', border: 'none', cursor: 'pointer' }}>
                 Stop Recording
               </button>
-              {transcript && isRecording && <p className="transcript-text">Transcribing: {transcript}</p>}
-              {currentQuestion.stateValue && !isRecording && <p className="voice-input-display">Voice Input: {currentQuestion.stateValue}</p>}
-
+              {transcript && isRecording && <p className="transcript-text" style={{ marginTop: '5px', fontSize: '0.9em', color: 'grey' }}>Transcribing: {transcript}</p>}
+              {currentQuestion.stateValue && !isRecording && <p className="voice-input-display" style={{ marginTop: '5px', fontSize: '0.9em', color: 'grey' }}>Voice Input: {currentQuestion.stateValue}</p>}
             </div>
           ) : currentQuestion.inputType === 'select' ? (
-            <div className="input-area">
+            <div className="input-area" style={{ marginBottom: '15px' }}>
               <select
                 id={`select-${currentQuestionIndex}`}
                 value={currentQuestion.stateValue}
                 onChange={(e) => currentQuestion.stateSetter(e.target.value)}
+                style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc', width: '100%', marginBottom: '10px' }}
               >
                 {currentQuestion.options.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -204,18 +217,18 @@ function Home() {
             </div>
           ) : null}
 
-          <div className="navigation-buttons">
+          <div className="navigation-buttons" style={{ display: 'flex', justifyContent: 'space-between' }}>
             {currentQuestionIndex > 0 && (
-              <button type="button" onClick={moveToPreviousQuestion}>
+              <button type="button" onClick={moveToPreviousQuestion} style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#008CBA', color: 'white', border: 'none', cursor: 'pointer' }}>
                 Previous
               </button>
             )}
             {currentQuestionIndex < questions.length - 1 ? (
-              <button type="button" onClick={moveToNextQuestion}>
+              <button type="button" onClick={moveToNextQuestion} style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#008CBA', color: 'white', border: 'none', cursor: 'pointer' }}>
                 Next
               </button>
             ) : (
-              <button type="submit" onClick={handleSubmit}>
+              <button type="submit" onClick={handleSubmit} style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#4CAF50', color: 'white', border: 'none', cursor: 'pointer' }}>
                 Submit Assessment
               </button>
             )}
