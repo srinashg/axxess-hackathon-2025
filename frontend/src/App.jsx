@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import lilip from "./owl-lilip.avif";
+import { ClipLoader } from "react-spinners";
 
 function App() {
   const [name, setName] = useState('');
@@ -20,10 +21,10 @@ function App() {
     { question: 'Can you tell me what your HDL was from your last lipid panel screening?', stateSetter: setHdl, stateValue: hdl, inputType: 'number', placeholder: 'HDL level' },
     { question: 'How about your LDL Cholesterol level?', stateSetter: setLdl, stateValue: ldl, inputType: 'number', placeholder: 'LDL level' },
     { question: 'What food did you eat today?', stateSetter: setFoodToday, stateValue: foodToday, inputType: 'text', placeholder: 'Food items' },
-    { question: 'How long did you exercise today?', stateSetter: setExerciseToday, stateValue: exerciseToday, inputType: 'text', placeholder: 'e.g., 30 minutes' },
-    { question: 'How long do you exercise per week?', stateSetter: setExercisePerWeek, stateValue: exercisePerWeek, inputType: 'text', placeholder: 'e.g., 2 hours' },
+    { question: 'How long did you exercise today? What did you do?', stateSetter: setExerciseToday, stateValue: exerciseToday, inputType: 'text', placeholder: 'e.g., 30 minutes' },
+    { question: 'How long do you exercise per week? What are your normal exercise activities?', stateSetter: setExercisePerWeek, stateValue: exercisePerWeek, inputType: 'text', placeholder: 'e.g., 2 hours' },
     {
-      question: 'Do you smoke or vape?',
+      question: 'Do you smoke or vape? If so, how often?',
       stateSetter: setSmokeVape,
       stateValue: smokeVape,
       inputType: 'text',
@@ -122,8 +123,11 @@ function App() {
   };
 
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    setLoading(true);
     console.log(apiKey);
 
     const healthData = {
@@ -153,7 +157,7 @@ function App() {
           messages: [
             {
               role: "system",
-              "content": "You are a wise, friendly owl who provides health advice in simple terms. When given inputs about a person’s current habits, goals, or challenges, offer a regimen to follow and provide critiques or suggestions for improvement. Keep it practical, insightful, and easy to understand. Structure the response like this: {\"greeting\": \"<greeting message>\", \"suggestions\": [{\"title\": \"<suggestion title>\", \"details\": \"<suggestion details>\"}, {...}, {...}]}. Treat the user as a friend (make every greeting include Hello! as well as their name). Be sure to specify if there are any conflictions with medications—really do a thorough analysis, but provide a user-friendly answer."
+              "content": "You are a wise, friendly owl who provides health advice in simple terms. When given inputs about a person’s current habits, goals, or challenges, offer a regimen to follow and provide critiques or suggestions for improvement. Keep it practical, insightful, and easy to understand. Structure the response like this: {\"greeting\": \"<greeting message>\", \"suggestions\": [{\"title\": \"<suggestion title>\", \"details\": \"<suggestion details>\"}, {...}, {...}]}. Treat the user as a friend (make every greeting include Hello! as well as their). Be sure to specify if there are any conflictions with medications—really do a thorough analysis, but provide a user-friendly answer."
             },
             {
               role: "user",
@@ -170,6 +174,8 @@ function App() {
     } catch (error) {
       console.error("Error:", error);
       setApiResponse("Failed to retrieve feedback. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -177,7 +183,7 @@ function App() {
     <>
       <div id="mainContent">
         <h1>Lilip</h1>
-        <p id="tagline">Your Friendly Guide to Healthy Cholesterol, Every Step of the Way</p>
+        <p id="tagline">Your friendly guide to healthy cholesterol, every step of the way!</p>
         <div className="container">
           <div id="widget">
             <div className="imageContainer">
@@ -250,13 +256,16 @@ function App() {
             </div>
           </div>
         </div>
-        {parsedResponse && (
-      <div className="api-response" style={{ backgroundColor: 'white', color: 'black', borderRadius: '10px', padding: '15px', marginTop: '20px', maxWidth: '400px', textAlign: 'center' }}>
+        {/* Show loading message while waiting for response */}
+        {loading && <ClipLoader size={50} color="#4A90E2" />}
+
+        {parsedResponse && !loading && (
+      <div className="api-response" style={{ backgroundColor: 'white', color: 'black', borderRadius: '10px', padding: '15px', marginTop: '20px', maxWidth: '400px', textAlign: 'center', marginBottom: '30px' }}>
         <h3>{parsedResponse.greeting}</h3>
         {parsedResponse.suggestions && parsedResponse.suggestions.length > 0 && (
       <div>
         {parsedResponse.suggestions.map((suggestion, index) => (
-          <div key={index} style={{ marginBottom: '15px' }}>
+          <div key={index} style={{ marginBottom: '15px', padding: '1em' }}>
             <h4>{suggestion.title}</h4>
             <p>{suggestion.details}</p>
           </div>
