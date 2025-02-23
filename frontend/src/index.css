@@ -1,154 +1,100 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
+  height: 100vh;
+  width: 100vw;
+  background-color: #B9243C;
+  color: white;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: sans-serif;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  text-align: center;
+  font-size: 4em;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+#tagline {
+  font-size: 1.3em;
+  font-style: italic;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#root {
+  height: inherit;
+  width: inherit;
+  overflow-y: auto; /* Ensures the body is scrollable */
 }
 
-/* src/index.css (or your CSS file) */
-.home-container {
+#widget {
+  border: solid #982032 2px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(167, 40, 40);
+  height: fit-content;
+  width: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  font-family: sans-serif;
+  padding: 2em;
+  text-align: center;
+  gap: 30px;
+}
+
+#mainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   width: 100vw;
 }
 
-.doll-container {
+.container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative; /* For positioning the text bubble */
+  height: inherit;
+  width: inherit;
 }
 
-.doll-image {
-  max-width: 200px; /* Adjust size as needed */
-  height: auto;
+.imageContainer {
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  justify-content: center;
+}
+
+#lilip {
+  width: 150px;
   border-radius: 50%;
 }
 
-.text-bubble {
-  position: absolute;
-  top: 10px; /* Adjust position relative to the doll */
-  left: 220px; /* Adjust position relative to the doll */
-  background-color: #e0f7fa; /* Light blue background */
-  border: 2px solid #b2ebf2;
-  border-radius: 20px;
-  padding: 20px;
-  width: 1000px; /* Adjust width as needed */
+.inputContainer {
+  max-width: 100%; /* Changed from fixed 50% width */
+  max-height: 100%; /* Allow height to adjust */
+  color: black;
+  background-color: white;
+  border-radius: 10px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: left;
-}
-
-.question-text {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.input-area {
-  margin-bottom: 15px;
-}
-
-.input-area input[type="number"],
-.input-area textarea {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.input-area textarea {
-    resize: vertical; /* Allow vertical resizing of textarea */
-    min-height: 80px;
-}
-
-
-.input-area button {
-  padding: 8px 15px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.navigation-buttons {
+  padding: 2em;
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensure content starts from top */
+  gap: 20px;
 }
 
-.navigation-buttons button {
-  padding: 10px 20px;
-  cursor: pointer;
-  margin: 0 10px;
+.question {
+  font-weight: bold;
+  font-size: 1.3em;
 }
-.transcript-text {
-    font-style: italic;
-    color: grey;
-    margin-top: 5px;
+
+/* Fix for input/textarea width to prevent horizontal scroll */
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Ensures padding doesn't cause overflow */
 }
-.voice-input-display {
-    margin-top: 5px;
-    font-weight: bold;
+
+textarea {
+  height: 80px;
+  resize: vertical; /* Allows resizing vertically */
 }
