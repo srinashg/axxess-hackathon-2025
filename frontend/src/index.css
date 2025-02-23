@@ -74,6 +74,7 @@ button:focus-visible {
   align-items: center;
   padding: 20px;
   font-family: sans-serif;
+  width: 100vw;
 }
 
 .doll-container {
@@ -86,6 +87,7 @@ button:focus-visible {
 .doll-image {
   max-width: 200px; /* Adjust size as needed */
   height: auto;
+  border-radius: 50%;
 }
 
 .text-bubble {
@@ -96,7 +98,7 @@ button:focus-visible {
   border: 2px solid #b2ebf2;
   border-radius: 20px;
   padding: 20px;
-  width: 300px; /* Adjust width as needed */
+  width: 1000px; /* Adjust width as needed */
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
   text-align: left;
 }

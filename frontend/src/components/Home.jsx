@@ -152,23 +152,14 @@ function Home() {
 
   return (
     <div className="home-container" style={{ backgroundColor: '#B9243C', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <nav style={{ width: '100%', padding: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', alignItems: 'center' }}>
-          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Home</a></li>
-          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>About</a></li>
-          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Services</a></li>
-          <li style={{ marginLeft: '10px', marginRight: '10px' }}><a href="#" style={{ color: 'white', textDecoration: 'none' }}>Contact</a></li>
-        </ul>
-      </nav>
-
       <div style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
-        <h1>Welcome to your Health Assessment!</h1>
-        <p>Please answer the questions by voice to monitor your health habits and cholesterol levels.</p>
+        <h1>Lilip</h1>
+        <p style={{ fontSize: '2em'}}>Please answer the questions by voice to monitor your health habits and cholesterol levels.</p>
       </div>
 
       <div className="doll-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '30px' }}>
         <img src="/Lili_mascot.png" alt="Friendly Doll" className="doll-image" style={{ maxWidth: '200px', marginBottom: '20px' }} />
-        <div className="text-bubble" style={{ backgroundColor: 'white', color: 'black', borderRadius: '15px', padding: '20px', marginBottom: '20px', maxWidth: '80%', textAlign: 'left' }}>
+        <div className="text-bubble" style={{ backgroundColor: 'white', color: 'black', borderRadius: '15px', padding: '20px', marginBottom: '20px', maxWidth: '350px', textAlign: 'left' }}>
           <p className="question-text" style={{ fontWeight: 'bold', marginBottom: '10px' }}>{currentQuestion.question}</p>
 
           {currentQuestion.inputType === 'number' || currentQuestion.inputType === 'text' ? (
